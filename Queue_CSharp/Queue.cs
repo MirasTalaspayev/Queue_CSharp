@@ -46,6 +46,11 @@ namespace Queue_CSharp
                 Push(i);
             }
         }
+        public Queue(params int[] array)
+        {
+            foreach (int x in array)
+                Push(x);
+        }
         public void Push(int val)
         {
             Node temp = new Node(val);
@@ -96,7 +101,7 @@ namespace Queue_CSharp
         }
         public void Print()
         {
-            Console.WriteLine("[");
+            Console.Write("[");
             Node temp = front;
             while (temp != back)
             {

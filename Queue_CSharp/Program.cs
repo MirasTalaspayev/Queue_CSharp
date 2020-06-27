@@ -10,6 +10,10 @@ namespace Queue_CSharp
     {
         static void Main(string[] args)
         {
+            int[] arr = new int[] { 10, 15, 20 };
+            Queue m = new Queue(arr);
+            m.Print();
+            Console.ReadLine();
         }
     }
 }
