@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -7,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace Queue_CSharp
 {
-    class Node
+    class Node<T>
     {
-        public int val;
-        public Node next;
+        public T val;
+        public Node<T> next;
         public Node() { }
-        public Node(int value)
+        public Node(T value)
         {
             val = value;
             next = null;
         }
     }
-    class Queue
+    class Queue<T> : IEnumerable
     {
-        Node front;
-        Node back;
+        Node<T> front;
+        Node<T> back;
         private int queue_size { get; set; }
 
         public Queue()
@@ -30,30 +31,30 @@ namespace Queue_CSharp
             back = null;
             queue_size = 0;
         }
-        public Queue(Queue que)
+        public Queue(Queue<T> que)
         {
-            Node temp = que.front;
+            Node<T> temp = que.front;
             while (temp != null)
             {
                 Push(temp.val);
                 temp = temp.next;
             }
         }
-        public Queue(List<int> list)
+        public Queue(List<T> list)
         {
-            foreach (int i in list)
+            foreach (T i in list)
             {
                 Push(i);
             }
         }
-        public Queue(params int[] array)
+        public Queue(params T[] array)
         {
-            foreach (int x in array)
+            foreach (T x in array)
                 Push(x);
         }
-        public void Push(int val)
+        public void Push(T val)
         {
-            Node temp = new Node(val);
+            Node<T> temp = new Node<T>(val);
             if (queue_size == 0)
             {
                 front = temp;
@@ -77,7 +78,7 @@ namespace Queue_CSharp
                 back = null;
                 return;
             }
-            Node temp = front;
+            Node<T> temp = front;
             front = front.next;
         }
         public void Clear()
@@ -85,7 +86,7 @@ namespace Queue_CSharp
             front = null;
             back = null;
         }
-        public int Peek()
+        public T Peek()
         {
             if (queue_size == 0)
                 throw new ArgumentOutOfRangeException("Pop().", "Queue is Empty.");
@@ -102,13 +103,34 @@ namespace Queue_CSharp
         public void Print()
         {
             Console.Write("[");
-            Node temp = front;
+            Node<T> temp = front;
             while (temp != back)
             {
                 Console.Write(temp.val + ", ");
                 temp = temp.next;
             }
             Console.Write(temp.val + "]");
+        }
+        public override string ToString()
+        {
+            string output = "[";
+            Node<T> temp = front;
+            while (temp != back)
+            {
+                output += String.Format(temp.val.ToString() + ", ");
+                temp = temp.next;
+            }
+            output += String.Format(back.val + "]");
+            return output;
+        }
+        public IEnumerator GetEnumerator()
+        {
+            Node<T> temp = front;
+            while(temp != null)
+            {
+                yield return temp.val;
+                temp = temp.next;
+            }
         }
     }
 }

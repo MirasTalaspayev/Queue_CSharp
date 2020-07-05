@@ -11,8 +11,13 @@ namespace Queue_CSharp
         static void Main(string[] args)
         {
             int[] arr = new int[] { 10, 15, 20 };
-            Queue m = new Queue(arr);
+            Queue<int> m = new Queue<int>(arr);
             m.Print();
+            Console.WriteLine();
+            Console.WriteLine(m);
+            foreach (int i in m) Console.WriteLine(i);
+            Queue<int> m2 = new Queue<int>(5);
+            m2.Print();
             Console.ReadLine();
         }
     }
