@@ -19,10 +19,10 @@ namespace Queue_CSharp
             next = null;
         }
     }
-    class Queue<T> : IEnumerable
+    class Queue<T> : IEnumerable, IComparable
     {
-        Node<T> front;
-        Node<T> back;
+        private Node<T> front { get; set; }
+        private Node<T> back { get; set; }
         private int queue_size { get; set; }
 
         public Queue()
@@ -131,6 +131,11 @@ namespace Queue_CSharp
                 yield return temp.val;
                 temp = temp.next;
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
