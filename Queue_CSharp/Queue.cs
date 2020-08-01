@@ -126,7 +126,7 @@ namespace Queue_CSharp
         public IEnumerator GetEnumerator()
         {
             Node<T> temp = front;
-            while(temp != null)
+            while (temp != null)
             {
                 yield return temp.val;
                 temp = temp.next;
@@ -137,5 +137,28 @@ namespace Queue_CSharp
         {
             throw new NotImplementedException();
         }
+        public Queue<T> FindAll(Predicate<T> predicate)
+        {
+            Queue<T> new_queue = new Queue<T>();
+            Node<T> node = front;
+            while (node != null)
+            {
+                if (predicate(node.val))
+                    new_queue.Push(node.val);
+                node = node.next;
+            }
+            return new_queue;
+        }
+        public T Find(Predicate<T> predicate)
+        {
+            Node<T> node = front;
+            while (node != null)
+            {
+                if (predicate(node.val))
+                    return node.val;
+                node = node.next;
+            }
+            return default(T);
+        } 
     }
 }

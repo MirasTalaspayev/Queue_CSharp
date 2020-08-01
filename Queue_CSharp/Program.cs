@@ -12,12 +12,11 @@ namespace Queue_CSharp
         {
             int[] arr = new int[] { 10, 15, 20 };
             Queue<int> m = new Queue<int>(arr);
-            m.Print();
+            Queue<int> temp = m.FindAll(x => x % 2 == 0);
+            temp.Print();
             Console.WriteLine();
-            Console.WriteLine(m);
-            foreach (int i in m) Console.WriteLine(i);
-            Queue<int> m2 = new Queue<int>(5);
-            m2.Print();
+            int s = m.Find(x => x % 3 == 0);
+            Console.WriteLine(s);
             Console.ReadLine();
         }
     }
